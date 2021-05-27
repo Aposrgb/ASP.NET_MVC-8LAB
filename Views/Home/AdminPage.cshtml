@@ -1,0 +1,37 @@
+﻿@model WebApplication4.Models.Admin
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AdminPage</title>
+</head>
+<body>
+    <div style=" display: flex; flex-direction: column; align-items: center; margin-top: 200px;">
+        @if (ViewData["wrong"] != null) {
+            if (ViewData["wrong"].ToString()=="wrong") { 
+                <div>Неверный пароль</div>
+            }
+        }
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <div>
+                Login
+                <label>@Html.TextBoxFor(x => x.login)</label>
+            </div>
+            <div>
+                Password
+                <label>@Html.TextBoxFor(x => x.password)</label>
+            </div>
+            <div>
+                <input type="submit" value="Отправить!" />
+            </div>
+        }
+    </div>
+</body>
+</html>

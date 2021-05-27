@@ -1,0 +1,98 @@
+﻿@model WebApplication4.Models.Orders
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>OrderList</title>
+</head>
+<body>
+    <div>
+        <table style=" display: flex; justify-content: space-around; margin-bottom: 100px;">
+            <tr>
+                <th>id пользователя</th>
+                <th>id продукта</th>
+                <th>Кол-во скупленных продуктов</th>
+            </tr>
+            @foreach (WebApplication4.Models.OrderDetails s in WebApplication4.Controllers.HomeController.orderD)
+            {
+                <tr class="orders">
+                    <th>@s.id_client</th>
+                    <th>@s.id_product</th>
+                    <th>@s.count</th>
+                </tr>
+            }
+        </table>
+        <table style=" display: flex; justify-content: space-around; margin-bottom: 100px;">
+            <tr>
+                <th>ФИО</th>
+                <th>Телефон</th>
+                <th>Почта</th>
+            </tr>
+            @foreach (WebApplication4.Models.Client s in WebApplication4.Controllers.HomeController.orderC)
+            {
+                <tr class="orders">
+                    <th>@s.FIO</th>
+                    <th>@s.Phone</th>
+                    <th>@s.Email</th>
+                </tr>
+            }
+        </table>
+        @using (Html.BeginForm("OrderList", "Home"))
+        {
+            <div>
+                Имя продукта
+                <label>@Html.TextBoxFor(x => x.Name)</label>
+            </div>
+            <div>
+                Цена
+                <label>@Html.TextBoxFor(x => x.Price)</label>
+            </div>
+            <div>
+                Описание
+                <label>@Html.TextBoxFor(x => x.Description)</label>
+            </div>
+            <div>
+                Кол-во
+                <label>@Html.TextBoxFor(x => x.Count)</label>
+            </div>
+            <input type="submit" value="Добавить заказ?" />
+        }
+        <table style=" display: flex; justify-content: space-around; margin-bottom: 100px;">
+            <tr>
+                <th>Id</th>
+                <th>Имя</th>
+                <th>Цена</th>
+                <th>Описание</th>
+                <th>Кол-во</th>
+            </tr>
+            @foreach (WebApplication4.Models.Orders s in WebApplication4.Controllers.HomeController.order)
+            {
+                <tr class="orders">
+                    <th>@s.Id</th>
+                    <th>@s.Name</th>
+                    <th>@s.Price</th>
+                    <th>@s.Description</th>
+                    <th>@s.Count</th>
+                </tr>
+            }
+        </table>
+        @using (Html.BeginForm("OrderCount", "Home"))
+        {
+            <div>
+                ID
+                <label>@Html.TextBoxFor(x => x.Id)</label>
+            </div>
+            <div>
+                Кол-во
+                <label>@Html.TextBoxFor(x => x.Count)</label>
+            </div>
+            <input type="submit" value="Изменить заказ?" />
+        }
+    </div>
+</body>
+</html>

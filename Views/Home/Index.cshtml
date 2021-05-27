@@ -1,0 +1,72 @@
+﻿@model WebApplication4.Models.Orders
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/Content/Style.css" />
+</head>
+<body>
+    <div id="top">
+        <div style="display: flex;height: fit-content;padding: 30px;flex-direction: column; align-items: center;">
+            <div>Логин (@Session["korz"].ToString())</div>
+            @if (int.Parse(Session["korz"].ToString()) > 0)
+            {
+                using (Html.BeginForm("BuyProd", "Home"))
+                {
+                    <input type="submit" value="Оформить заказ" />
+                }
+            }
+            @using (Html.BeginForm("AdminPage", "Home"))
+            {
+                <input type="submit" value="Войти как администратор?" />
+            }
+        </div>
+        <div id="res"></div>
+    </div>
+    <div id="table">
+        <table>
+            <tr>
+                <th>Имя</th>
+                <th>Цена</th>
+                <th>Описание</th>
+                <th>Кол-во</th>
+            </tr>
+            @{
+                int j = 0;
+                List<int> list = new List<int>();
+            }
+            @foreach (WebApplication4.Models.Orders s in WebApplication4.Controllers.HomeController.order)
+            {
+                {
+                    j++;
+                    list.Add(s.Id);
+                    list.Add(s.Count);
+                }
+                <tr class="orders">
+                    <th>@s.Name</th>
+                    <th>@s.Price</th>
+                    <th>@s.Description</th>
+                    <th>@s.Count</th>
+                </tr>
+            }
+        </table>
+        <div style="display:grid;">
+            @for (int i = 0; i < j * 2; i += 2)
+            {
+                using (@Html.BeginForm("Indexex", "Home"))
+                {
+                    <input type="hidden" value="@list[i]" name="Id"/>
+                    <input type="submit" value="Добавить в корзину" />
+                    <input type="number" name="name" value="0" min="0" max="@list[i+1]" />
+                }
+            }
+        </div>
+    </div>
+</body>
+</html>

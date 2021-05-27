@@ -1,0 +1,36 @@
+﻿@model WebApplication4.Models.Client
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>BuyProd</title>
+</head>
+<body>
+    <div style=" display: flex; flex-direction: column; align-items: center; margin-top: 200px;">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <div>
+                ФИО
+                <label>@Html.TextBoxFor(x => x.FIO)</label>
+            </div>
+            <div>
+                Телефон
+                <label>@Html.TextBoxFor(x => x.Phone)</label>
+            </div>
+            <div>
+                Почта
+                <label>@Html.TextBoxFor(x => x.Email)</label>
+            </div>
+            <div>
+                <input type="submit" value="Отправить!" />
+            </div>
+        }
+    </div>
+</body>
+</html>
